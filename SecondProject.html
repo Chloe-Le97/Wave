@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Second Project</title>
+</head>
+<body>
+    <canvas></canvas>
+</body>
+</html>
+<style>
+    body{
+        margin:0;
+    }
+    canvas{
+        border: 2px solid black;
+    }
+</style>
+<script>
+    
+    var canvas = document.querySelector('canvas');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    var c= canvas.getContext('2d');
+
+    const wave ={
+        y: canvas.height/2,
+        length: 0.009,
+        amplitude: 80,
+        frequency: 0.09
+    }
+
+    let increment = wave.frequency;
+    
+    function animate(){
+        requestAnimationFrame(animate);
+        c.clearRect(0,0,canvas.width,canvas.height);
+
+        c.beginPath();
+        c.moveTo(canvas.width/2+100,0);
+
+        for (var i=0;i<canvas.height;i++){
+            
+            c.lineTo(canvas.width/2 + Math.sin(i*wave.length+increment)*wave.amplitude,i);
+            c.lineTo(canvas.width,0);
+            c.lineTo(canvas.width,canvas.height);
+ 
+        }    
+        
+        c.fillStyle = "pink";
+            c.fill();
+       
+            
+        increment += wave.frequency;
+    }   
+    animate();
+    function text(){
+        requestAnimationFrame(text);
+        c.font="60px 'Shadows Into Light";
+        c.fillStyle = "white";
+        c.textAlign = "center";
+        c.fillText("Have a nice day", canvas.width-350, canvas.height/2);
+    }
+    text();
+
+</script>  
